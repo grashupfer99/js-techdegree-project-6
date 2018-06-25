@@ -14,7 +14,7 @@ const fields = ["Title", "Price", "ImageURL", "URL", "Time"];
 // Add fields, remove quotations marks, comma with a space between each entry in the file
 const csvParser = new csvParse({ fields, quote: "", delimiter: ", " });
 // website root and 'data' directory strings
-const entryPoint = "http://shirts4midfke.com/shirts.php/";
+const entryPoint = "http://shirts4mike.com/shirts.php/";
 const dir = './data';
 // get current date
 const date = new Date();
