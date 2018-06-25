@@ -14,7 +14,7 @@ const fields = ["Title", "Price", "ImageURL", "URL", "Time"];
 // Add fields, remove quotations marks, comma with a space between each entry in the file
 const csvParser = new csvParse({ fields, quote: "", delimiter: ", " });
 // website root and 'data' directory strings
-const entryPoint = "http://shirts4mike.com/shirts.php/";
+const entryPoint = "http://shirts4midfke.com/shirts.php/";
 const dir = './data';
 // get current date
 const date = new Date();
@@ -38,9 +38,10 @@ const csvHandler = (data) => {
 // Error message is displayed when the website is down 
 const displayError = (error) => {
     if (error && error.code === "ENOTFOUND") {
-        console.log(`There's been a 404 error. Cannot connect to http://shirts4mike.com`);
+        const errorMsg = `There's been a 404 error. Cannot connect to http://shirts4mike.com`;
+        console.log(errorMsg);
       // When an error occurs, it is logged to a file named scraper-error.log 
-      fs.appendFile("./scraper-error.log", `${date.toString()}\n`, err => {
+        fs.appendFile("./scraper-error.log", `${date.toString()} <${errorMsg}>\n`, err => {
           if (err) throw error;
       });
     }
