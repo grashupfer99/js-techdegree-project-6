@@ -12,7 +12,7 @@ const csvParse = require('json2csv').Parser;
 // Set default fields for csv file  
 const fields = ["Title", "Price", "ImageURL", "URL", "Time"];
 // Add fields to the json 2 csv parser
-const csvParser = new csvParse({ fields, quote:"", delimiter: ',\t' });
+const csvParser = new csvParse({ fields, quote:"", delimiter: ', ' });
 // website root and 'data' directory strings
 const entryPoint = "http://shirts4mike.com/shirts.php/";
 const dir = './data';
