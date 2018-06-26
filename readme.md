@@ -1,4 +1,4 @@
-# Content Scraper
+## Content Scraper
 
 **Install Dependencies:**
 ```
