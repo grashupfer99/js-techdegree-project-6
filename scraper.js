@@ -11,8 +11,8 @@ const csvParse = require('json2csv').Parser;
 
 // Set default fields for csv file  
 const fields = ["Title", "Price", "ImageURL", "URL", "Time"];
-// Add fields, remove quotations marks, comma with a space between each entry in the file
-const csvParser = new csvParse({ fields, quote: "", delimiter: ", " });
+// Add fields to the json 2 csv parser
+const csvParser = new csvParse({ fields, quote:"", delimiter: ',\t' });
 // website root and 'data' directory strings
 const entryPoint = "http://shirts4mike.com/shirts.php/";
 const dir = './data';
@@ -37,13 +37,15 @@ const csvHandler = (data) => {
 
 // Error message is displayed when the website is down 
 const displayError = (error) => {
-    if (error && error.code === "ENOTFOUND") {
-        const errorMsg = `There's been a 404 error. Cannot connect to http://shirts4mike.com`;
-        console.log(errorMsg);
-      // When an error occurs, it is logged to a file named scraper-error.log 
-        fs.appendFile("./scraper-error.log", `${date.toString()} <${errorMsg}>\n`, err => {
-          if (err) throw error;
-      });
+    if (error) {
+        if (error.code === "ENOTFOUND" || error.code === "ENOENT"){
+            const errorMsg = `There's been a 404 error. Cannot connect to http://shirts4mike.com`;
+            console.log(errorMsg);
+            // When an error occurs, it is logged to a file named scraper-error.log 
+            fs.appendFile("./scraper-error.log", `[${date.toString()}] <${errorMsg}>\n`, err => {
+                if (err) throw error;
+            });
+        }
     }
 }
 
@@ -70,7 +72,7 @@ scraper(entryPoint, {
         scraper(url, {
             Title: {
                 selector: ".breadcrumb",
-                convert: x => x.slice(x.indexOf('>') + 2)
+                convert: x => x.slice(x.indexOf('>') + 2, x.indexOf(','))
             },  
             Price: ".price",
             'ImageURL': {
